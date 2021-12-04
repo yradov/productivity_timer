@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("My Work Timer"),
-        ),
-        body: Center(
-          child: Text("My Work Timer"),
-        ),
-      ),
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
+      home: const TimerHomePage(),
     );
   }
-}
+} //MyApp
 
+class TimerHomePage extends StatelessWidget {
+  const TimerHomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("My Work Timer"),
+        ),
+        body: Center(
+          child: Column(),
+        ),
+      );
+  }
+}
