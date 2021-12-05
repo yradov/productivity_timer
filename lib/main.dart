@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:productivity_timer/widgets.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
 class TimerHomePage extends StatelessWidget {
   const TimerHomePage({Key? key}) : super(key: key);
 
-  final double defaultPadding = 5.0;
+  final double defaultPadding = 5;
+  final double defaultMargin = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +34,8 @@ class TimerHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: defaultMargin,
             ),
             Row(
               children: [
@@ -45,7 +46,7 @@ class TimerHomePage extends StatelessWidget {
                   child: ProductivityButton(
                     color: const Color(0xff009688),
                     text: 'Work',
-                    size: 0,
+                    size: 150,
                     onPressed: emptyMethod,
                   ),
                 ),
@@ -75,6 +76,41 @@ class TimerHomePage extends StatelessWidget {
                   padding: EdgeInsets.all(defaultPadding),
                 ),
               ],
+            ),
+            const Expanded(
+              child: Text("Hello"),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(defaultPadding),
+                ),
+                Expanded(
+                  child: ProductivityButton(
+                    color: const Color(0xff212121),
+                    text: 'Stop',
+                    size: 150,
+                    onPressed: emptyMethod,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(defaultPadding),
+                ),
+                Expanded(
+                  child: ProductivityButton(
+                    color: const Color(0xff009688),
+                    text: 'Restart',
+                    size: 150,
+                    onPressed: emptyMethod,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(defaultPadding),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: defaultMargin,
             ),
           ],
         ),
