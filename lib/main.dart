@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:productivity_timer/widgets.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,8 +32,10 @@ class TimerHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("My Work Timer"),
       ),
-      body: Center(
-        child: Column(
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        final double availableWidth = constraints.maxWidth;
+        return Column(
           children: [
             SizedBox(
               height: defaultMargin,
@@ -77,8 +80,15 @@ class TimerHomePage extends StatelessWidget {
                 ),
               ],
             ),
-            const Expanded(
-              child: Text("Hello"),
+            Expanded(
+              child: CircularPercentIndicator(
+                radius: availableWidth / 2,
+                lineWidth: 10.0,
+                percent: 1,
+                center:
+                    const Text("30:00"),
+                progressColor: const Color(0xff009688),
+              ),
             ),
             Row(
               children: [
@@ -113,8 +123,8 @@ class TimerHomePage extends StatelessWidget {
               height: defaultMargin,
             ),
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 
