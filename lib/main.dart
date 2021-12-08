@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:productivity_timer/widgets.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import './timer.dart';
+import './timermodel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,19 +17,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: const TimerHomePage(),
+      home: TimerHomePage(),
     );
   }
 } // MyApp
 
 class TimerHomePage extends StatelessWidget {
-  const TimerHomePage({Key? key}) : super(key: key);
+  TimerHomePage({Key? key}) : super(key: key);
 
   final double defaultPadding = 5;
   final double defaultMargin = 10;
-
+  final CountDownTimer timer = CountDownTimer();
   @override
   Widget build(BuildContext context) {
+    timer.startWork();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Work Timer"),
@@ -81,13 +85,24 @@ class TimerHomePage extends StatelessWidget {
               ],
             ),
             Expanded(
-              child: CircularPercentIndicator(
-                radius: availableWidth / 2,
-                lineWidth: 10.0,
-                percent: 1,
-                center:
-                    const Text("30:00"),
-                progressColor: const Color(0xff009688),
+              child: StreamBuilder(
+                initialData: '00:00',
+                stream: timer.stream(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  TimerModel timer = (snapshot.data == '00:00')
+                      ? TimerModel('00:00', 1)
+                      : snapshot.data;
+                  return CircularPercentIndicator(
+                    radius: availableWidth / 2,
+                    lineWidth: 10.0,
+                    percent: timer.percent,
+                    center: Text(
+                      timer.time,
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    progressColor: const Color(0xff009688),
+                  );
+                },
               ),
             ),
             Row(
