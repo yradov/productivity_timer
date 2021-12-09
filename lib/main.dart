@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productivity_timer/settings.dart';
 import 'package:productivity_timer/widgets.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import './timer.dart';
@@ -25,6 +26,24 @@ class MyApp extends StatelessWidget {
 class TimerHomePage extends StatelessWidget {
   TimerHomePage({Key? key}) : super(key: key);
 
+  final List<PopupMenuItem<String>> menuItems = <PopupMenuItem<String>>[
+    const PopupMenuItem<String>(
+      value: 'Home',
+      child: Text('Home'),
+    ),
+    const PopupMenuItem<String>(
+      value: 'Settings',
+      child: Text('Settings'),
+    ),
+  ];
+
+  void goToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SettingsScreen()),
+    );
+  }
+
   final double defaultPadding = 5;
   final double defaultMargin = 10;
   final CountDownTimer timer = CountDownTimer();
@@ -35,6 +54,18 @@ class TimerHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Work Timer"),
+        actions: [
+          PopupMenuButton<String>(
+            itemBuilder: (BuildContext context) {
+              return menuItems.toList();
+            },
+            onSelected: (s) {
+              if (s == 'Settings') {
+                goToSettings(context);
+              }
+            },
+          ),
+        ],
       ),
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
