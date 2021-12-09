@@ -9,6 +9,9 @@ class CountDownTimer {
   Duration? _fullTime;
   int work = 30;
 
+  int shortBreack = 5;
+  int longBreack = 20;
+
   Stream<TimerModel> stream() async* {
     yield* Stream.periodic(const Duration(seconds: 1), (int a) {
       String time;
@@ -38,6 +41,22 @@ class CountDownTimer {
   void startWork() {
     _radius = 1;
     _time = Duration(minutes: work, seconds: 0);
+    _fullTime = _time;
+  }
+
+  void stopTimer() {
+    _isActive = false;
+  }
+
+  void startTimer() {
+    if (_time!.inSeconds > 0) {
+      _isActive = true;
+    }
+  }
+
+  void startBreack({required bool isShort}) {
+    _radius = 1;
+    _time = Duration(minutes: isShort ? shortBreack : longBreack, seconds: 0);
     _fullTime = _time;
   }
 }// CountDownTimer

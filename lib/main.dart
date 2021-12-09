@@ -54,7 +54,7 @@ class TimerHomePage extends StatelessWidget {
                     color: const Color(0xff009688),
                     text: 'Work',
                     size: 150,
-                    onPressed: emptyMethod,
+                    onPressed: () => timer.startWork(),
                   ),
                 ),
                 Padding(
@@ -65,7 +65,7 @@ class TimerHomePage extends StatelessWidget {
                     color: const Color(0xff607D8B),
                     text: 'Short Break',
                     size: 150,
-                    onPressed: emptyMethod,
+                    onPressed: () => timer.startBreack(isShort: true),
                   ),
                 ),
                 Padding(
@@ -76,7 +76,7 @@ class TimerHomePage extends StatelessWidget {
                     color: const Color(0xff455A64),
                     text: 'Long Break',
                     size: 150,
-                    onPressed: emptyMethod,
+                    onPressed: () => timer.startBreack(isShort: false),
                   ),
                 ),
                 Padding(
@@ -115,7 +115,7 @@ class TimerHomePage extends StatelessWidget {
                     color: const Color(0xff212121),
                     text: 'Stop',
                     size: 150,
-                    onPressed: emptyMethod,
+                    onPressed: () => timer.stopTimer(),
                   ),
                 ),
                 Padding(
@@ -126,7 +126,7 @@ class TimerHomePage extends StatelessWidget {
                     color: const Color(0xff009688),
                     text: 'Restart',
                     size: 150,
-                    onPressed: emptyMethod,
+                    onPressed: () => timer.startTimer(),
                   ),
                 ),
                 Padding(
@@ -143,5 +143,6 @@ class TimerHomePage extends StatelessWidget {
     );
   }
 
+  // used to as stub in onPressed
   void emptyMethod() {}
 }// TimerHomePage
