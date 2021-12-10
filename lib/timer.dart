@@ -42,6 +42,14 @@ class CountDownTimer {
     _radius = 1;
     _time = Duration(minutes: work, seconds: 0);
     _fullTime = _time;
+    startTimer();
+  }
+
+  void startBreack({required bool isShort}) {
+    _radius = 1;
+    _time = Duration(minutes: isShort ? shortBreack : longBreack, seconds: 0);
+    _fullTime = _time;
+    startTimer();
   }
 
   void stopTimer() {
@@ -52,11 +60,5 @@ class CountDownTimer {
     if (_time!.inSeconds > 0) {
       _isActive = true;
     }
-  }
-
-  void startBreack({required bool isShort}) {
-    _radius = 1;
-    _time = Duration(minutes: isShort ? shortBreack : longBreack, seconds: 0);
-    _fullTime = _time;
   }
 }// CountDownTimer
