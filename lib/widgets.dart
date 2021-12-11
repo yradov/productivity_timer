@@ -28,16 +28,22 @@ class ProductivityButton extends StatelessWidget {
   }
 } // ProductivityButton
 
+typedef CallbackSettings = void Function(String, int);
+
 class SettingButton extends StatelessWidget {
   final Color color;
   final String text;
   final int value;
-
+  final String setting;
+  final CallbackSettings callback;
+  
   const SettingButton({
     Key? key,
     required this.color,
     required this.text,
     required this.value,
+    required this.setting,
+    required this.callback,
   }) : super(key: key);
 
   @override
@@ -47,7 +53,7 @@ class SettingButton extends StatelessWidget {
         text,
         style: const TextStyle(color: Colors.white),
       ),
-      onPressed: () => {},
+      onPressed: () => callback(setting, value),
       color: color,
     );
   }
